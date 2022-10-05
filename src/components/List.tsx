@@ -1,12 +1,14 @@
 import React from 'react'
 
+import Item from './Item'
+
 const List: React.FC = () => {
     const todos = [
         {
-            name: "Teste",
+            task: "Teste",
             time: "01:30:00"
         }, {
-            name: "React",
+            task: "React",
             time: "02:30:00"
         }
     ]
@@ -16,10 +18,10 @@ const List: React.FC = () => {
             <ul>
                 {
                     todos.map((todo, index) => (
-                        <li key={`todos ${index}`}>
-                            <h3> {todo.name} </h3>
-                            <span> {todo.time} </span>
-                        </li>
+                        <Item 
+                            key={`item ${index}`}
+                            {...todo}
+                        />
                     ))
                 }
             </ul>
