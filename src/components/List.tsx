@@ -1,32 +1,24 @@
-import React from 'react'
+import React from "react";
+import { Task } from "../types/task";
+import Item from "./Item";
+import style from "./List.module.scss";
 
-import Item from './Item'
-
-const List: React.FC = () => {
-    const todos = [
-        {
-            task: "Teste",
-            time: "01:30:00"
-        }, {
-            task: "React",
-            time: "02:30:00"
-        }
-    ]
-    return (
-        <aside>
-            <h2>Estudos do dia</h2>
-            <ul>
-                {
-                    todos.map((todo, index) => (
-                        <Item 
-                            key={`item ${index}`}
-                            {...todo}
-                        />
-                    ))
-                }
-            </ul>
-        </aside>
-    )
+interface Props {
+    tasks: Task[];
+    selectTask: (selectedTask: Task) => void;
 }
 
-export default List
+const List: React.FunctionComponent<Props> = ({ tasks, selectTask }) => {
+    return (
+        <aside className={style.listaTarefas}>
+            <h2> Estudos do dia </h2>
+            <ul>
+                {tasks.map((item) => (
+                    <Item selectTask={selectTask} key={item.id} {...item} />
+                ))}
+            </ul>
+        </aside>
+    );
+};
+
+export default List;

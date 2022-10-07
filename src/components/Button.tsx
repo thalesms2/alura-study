@@ -1,10 +1,21 @@
 import React from 'react'
+import style from './Button.module.scss'
 
-const Button: React.FC = () => {
+interface Props {
+    type?: "button" | "submit" | "reset" | undefined
+    onClick?: () => void
+    children?: React.ReactNode
+}
+
+const Button: React.FC<Props> = ({type, onClick, children}) => {
 
     return (
-        <button>
-            
+        <button
+            onClick={onClick}
+            type={type}
+            className={style.botao}
+        >
+            {children}
         </button>
     )
 }

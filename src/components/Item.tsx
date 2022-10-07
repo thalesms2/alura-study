@@ -1,16 +1,42 @@
-import React from 'react'
-interface ItemProps {
-    task: string
-    time: string
-}
-const Item: React.FC<ItemProps> = ({task, time}) => {
+import { Task } from "../types/task";
+import style from "./Item.module.scss";
 
+interface Props extends Task {
+    selectTask: (selectedTask: Task) => void;
+}
+
+export default function Item({
+    task,
+    time,
+    selected,
+    completed,
+    id,
+    selectTask,
+}: Props) {
     return (
-        <li>
-            <h3>{ task }</h3>
-            <span>{ time }</span>
+        <li
+            className={`${style.item} ${
+                selected ? style.itemSelecionado : ""
+            } ${completed ? style.itemCompletado : ""}`}
+            onClick={() =>
+                !completed &&
+                selectTask({
+                    task,
+                    time,
+                    selected,
+                    completed,
+                    id,
+                })
+            }
+        >
+            <h3>{task}</h3>
+            <span>{time}</span>
+            {completed && (
+                <span
+                    className={style.concluido}
+                    aria-label="tarefa completada"
+                ></span>
+            )}
         </li>
-    )
+    );
 }
-
-export default Item
